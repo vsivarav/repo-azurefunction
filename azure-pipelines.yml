@@ -1,0 +1,27 @@
+# azure-pipelines.yml
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'  # Use a Windows VM if needed by changing this to 'windows-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.x'  # Specify the Node.js version required for your project
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build    # Adjust this if your build command is different
+  displayName: 'Install dependencies and build'
+
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'dist'   # Adjust to your output directory if different
+    artifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'Publish artifacts'
