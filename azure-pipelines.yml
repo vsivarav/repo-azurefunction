@@ -2,7 +2,7 @@
 trigger:
   branches:
     include:
-      - main
+      - master
 
 pool:
   vmImage: 'ubuntu-latest'  # Use a Windows VM if needed by changing this to 'windows-latest'
